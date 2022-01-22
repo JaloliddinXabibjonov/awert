@@ -61,7 +61,7 @@ public class UserService {
 
     public ApiResponse register(SignUp signUp) {
         Optional<User> userOptional = userRepository.findByPhoneNumber(signUp.getPhoneNumber());
-        if (userOptional.isEmpty()) {
+        if (!userOptional.isPresent()) {
             User user = new User();
             user.setPhoneNumber(signUp.getPhoneNumber());
             user.setPassword(passwordEncoder.encode(signUp.getPassword()));
